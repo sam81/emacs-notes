@@ -1,0 +1,246 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage{fontspec}
+\usepackage[math-style=ISO]{unicode-math}
+\setmainfont{Alegreya}
+%\setmathfont{Libertinus Math}
+\setmonofont{Ubuntu Mono}
+\setsansfont{Kurier}
+
+\usepackage{xcolor}
+\definecolor{linkcol}{RGB}{0, 51, 153}
+\usepackage{keystroke}
+\usepackage{sectsty}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+
+\usepackage{hyperref}
+\hypersetup{pdftitle= emacs notes,
+            pdfauthor=Samuele Carcagno,
+            pdfpagemode=UseOutlines,
+            pdfstartview=FitH,
+            pdfkeywords={emacs, text, editing, programming, writing, text editor},
+            colorlinks=true,
+            linkcolor=linkcol,
+            citecolor=linkcol,
+            filecolor=linkcol,
+            urlcolor=black  
+} 
+
+\title{Emacs Notes}
+\author{Samuele Carcagno}
+\begin{document}
+\setlength{\parindent}{0pt}
+
+\maketitle
+\tableofcontents
+
+\chapter{Emacs commands}
+
+
+
+
+
+\section{Help}
+
+\texttt{C-h} Help Menu \\
+
+\section{Moving around}
+
+First, please notice that the bar you can drag with your mouse for moving around a document is \textbf{on the left} rather than on the right. It got me some days to discover this \ldots \\
+
+\texttt{C-a} Go to the beginning of the line \\
+
+\texttt{C-b} Go to the end of the line \\
+
+\texttt{M-a} Go to the beginning of a sentence \\
+
+\texttt{M-e} Go to the end  of a sentence \\
+
+\texttt{C-f} Move forward one character \\
+
+\texttt{C-b} Move backward one character \\
+
+\texttt{M-f} Move forward one word \\
+
+\texttt{M-b} Move backward one word \\
+
+\texttt{M-x goto-line} Press Enter, specify the line number and press Enter again. \\
+Recent versions of Emacs have also
+\texttt{M-g g} as a shortcut for \texttt{M-x goto-line} \\
+
+\texttt{M-<} Move to beginning of file \\
+
+\texttt{M->} Move to end of file \\
+
+\section{Killin' 'n Yankin' (or Cutting and Pasting)}
+
+\texttt{C-w} Kill \\
+
+\texttt{M-w} Copy \\
+
+\texttt{C-k} Kill line from cursor onwards \\
+
+\texttt{C-d} or \texttt{canc} Kill character under cursor \\
+
+\texttt{backspace} Kill character backwards \\
+
+\texttt{M-d} Kill word forward \\
+
+\texttt{M-canc} or \texttt{M-backspace} Kill word backwards \\
+
+\texttt{C-spacebar} or \texttt{C-@} Set the mark \\
+
+\section{Files and Buffers}
+
+\texttt{C-x C-s} Save \\
+
+\texttt{C-x C-f} Open file or create new file \\
+
+\texttt{C-x k filename} Kill buffer (close file)\\
+
+\texttt{M-x kill-some-buffers} Asks about each buffer, whether you want to kill it
+
+
+\section{Windows}
+
+\texttt{C-x 2} Split into two windows, one above and one below \\
+
+\texttt{C-x 3} Split into two windows, side by side \\
+
+\texttt{C-x o} Jump to the next window. This includes the mini-buffer's window, if that's active \\
+
+\texttt{C-M-v} Make the other window scroll \\
+\section{Searching \& Replacing}
+
+\texttt{C-s} Search forward \\
+
+\texttt{C-r} Search backwards \\
+
+\texttt{C-s Ret C-w} Search forward only entire word \\
+
+\texttt{C-r Ret C-w} Search backward only entire word \\
+
+\texttt{M-x replace-string} Replace all occurrences of a string with another one, from the point where you are onward \\
+
+\texttt{M-x query-replace} Ask before replacing \\
+
+\section{Repeating a Character or Command}
+
+\texttt{M-n c} Repeat the character `\texttt{c}' $n$ times\\ 
+
+\section{Using Emacs in a Terminal}
+
+\texttt{emacs -nw} Start Emacs in terminal mode \\
+
+\texttt{F10} Activate menu bar \\
+
+\section{Fonts}
+One way to change font is to add an entry into the \verb+~/.Xresources+ file, for example:
+\begin{verbatim}
+Emacs.font: Monospace-10
+\end{verbatim}
+then run on a terminal
+\begin{verbatim}
+xrdb -merge ~/.Xresources
+\end{verbatim}
+to change the setting for the current X session.
+
+
+\chapter{Spell Checking: Ispell and Aspell}
+\label{chap:spellchecking}
+
+If you have \texttt{Ispell} installed, you can use it for spell-checking with \texttt{Emacs}. If you want to use \texttt{Aspell} put this in your \texttt{.emacs}
+\begin{verbatim}
+  (setq-default ispell-program-name "aspell")
+\end{verbatim}
+
+To start spell-checking:\\
+
+\texttt{M-x ispell} Check the current buffer (all the file), if Transient Mark Mode is on, it spell-checks the active region\\
+
+\texttt{M-x ispell-region} Check region \\
+
+\texttt{M-x ispell-word} or \texttt{M-\$} Check word \\
+
+\texttt{M-x flyspell-mode} Highlight all misspelled words \\
+
+\texttt{M-x ispell-change-dictionary} Change the dictionary, to use for example the italian, british or other dictionaries. If you know the name of the dictionary, you can directly input it in the mini-buffer when prompted, otherwise press \verb+SPC+ for a list of available dictionaries. Remember that you might have to first install a given aspell dictionary to make it available.\\
+
+
+
+\chapter{Auctex}
+
+\section{Execute Command}
+
+\texttt{C-c C-c} plus command to execute \\
+
+\section{Fonts}
+
+\texttt{C-c C-f C-t} Typewriter \\
+
+\texttt{C-c C-f C-e} Emphasise \\
+
+\texttt{C-c C-f C-b} Boldface \\
+
+
+\section{Sectioning}
+\label{sec:sec}
+
+\texttt{C-c C-s} Insert sectioning command\\
+
+\section{Environments}
+
+\texttt{C-c C-e verbatim} Verbatim \\
+
+\texttt{C-c C-j} Insert Item\\
+
+
+\section{Multifile/Parsing}
+\label{sec:multi}
+
+\texttt{C-c \_} Set master file\\
+
+
+\section{Checking \LaTeX\ Syntax}
+
+\texttt{C-c C-c Check} Check the file\\
+
+\texttt{C-x `} or \texttt{C-x next-error} to jump to the errors in sequence \\
+
+
+\chapter{Aspell}
+\label{chap:aspell}
+
+If you want to spell-check using aspell directly from the command line rather than from within Emacs, here's some good tips. To start spell-checking
+\begin{verbatim}
+  $ aspell -c filename.txt
+\end{verbatim}
+the \texttt{add} option is very useful, it adds the current word to a personal dictionary, so next time aspell encounter that word, it won't highlight it as a possible error. The personal dictionary is a simple text file that is automatically created in your home directory. In my case, the file is named \verb+.aspell.en.pws+, you should substitute \verb+en+ with the code for the dictionary language you're using (e.g. \verb+it+ for Italian).
+
+\chapter{Emacs packages}
+
+To add a package repository (e.g.\ melpa-stable), add the following to your \verb+.emacs+:
+\begin{verbatim}
+(package-initialize)
+
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+\end{verbatim}
+
+Updating the package repository:
+\begin{verbatim}
+M-x package-refresh-contents
+\end{verbatim}
+
+Listing available packages:
+\begin{verbatim}
+M-x package-list-packages
+\end{verbatim}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: luatex
+%%% TeX-master: "emacs"
+%%% End: 
